@@ -4,22 +4,26 @@
     <meta charset="utf-8">
     <title>GuaiGuai Server</title>
     <style media="screen">
-      html,
-      body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #touch {
-        width: 100%;
-        height: 100%;
-        /*background-color: red;*/
-      }
+    * { margin:0; padding:0; } /* to remove the top and left whitespace */
+    html, body { width:100%; height:100%; overflow: hidden} /* just to be sure these are full screen*/
+    #touch { display:block; } /* To remove the scrollbars */
     </style>
   </head>
   <body>
-    <!-- <div class="" id="log"></div> -->
+    <canvas class="" id="touch" data-processing-sources="../processing/core.pde ../processing/monitor.pde"></canvas>
+    <script>
+    (function() {
+        var canvas = document.getElementById('touch');
+        // resize the canvas to fill browser window dynamically
+        window.addEventListener('resize', resizeCanvas, false);
+        function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+    })();
+    </script>
+
     <script charset="utf-8" src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script charset="utf-8" src="../bower_components/leancloud-realtime/dist/AV.realtime.js"></script>
     <script charset="utf-8" src="../bower_components/Processing.js/processing.js"></script>
@@ -31,7 +35,5 @@
     <!-- p5end -->
 
     <script charset="utf-8" src="./script.js"></script>
-
-    <canvas class="" id="touch" data-processing-sources="../processing/core.pde ../processing/monitor.pde"></canvas>
   </body>
 </html>
