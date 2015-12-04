@@ -1,2 +1,2 @@
 # swell07.github.io
-Sucks!!!!!!
+Oh yeah~
