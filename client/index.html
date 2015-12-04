@@ -7,11 +7,12 @@
     <title>TouchTouch</title>
     <style>
     * { margin:0; padding:0; } /* to remove the top and left whitespace */
-    html, body { width:100%; height:100%; } /* just to be sure these are full screen*/
+    html, body { width:100%; height:100%; overflow: hidden} /* just to be sure these are full screen*/
     #touch { display:block; } /* To remove the scrollbars */
     </style>
   </head>
   <body ontouchmove="event.preventDefault()">
+    <canvas class="" id="touch" data-processing-sources="../processing/core.pde ../processing/client.pde"></canvas>
     <script>
     (function() {
         var canvas = document.getElementById('touch');
@@ -24,6 +25,7 @@
         resizeCanvas();
     })();
     </script>
+
     <script charset="utf-8" src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script charset="utf-8" src="../bower_components/Processing.js/processing.js"></script>
     <script charset="utf-8" src="../bower_components/leancloud-realtime/dist/AV.realtime.js"></script>
@@ -33,8 +35,6 @@
     <script charset="utf-8" src="../bower_components/p5.js/lib/addons/p5.sound.min.js"></script>
     <script src="../p5/core.js" charset="utf-8"></script>
     <!-- p5end -->
-
-    <canvas class="" id="touch" data-processing-sources="../processing/core.pde ../processing/client.pde"></canvas>
 
     <script charset="utf-8" src="./script.js"></script>
   </body>
