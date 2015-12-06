@@ -14,7 +14,7 @@ class Particle {
   float Y;
 
   Particle(PVector l, float _r, color _c, float vx, float vy, float ax, float ay, boolean isFRun, ParticleSystem ps) {
-    acceleration = new PVector(ax, ay); //new PVector(0, random(-0.05, 0.05));
+    acceleration = new PVector(ax, ay); 
     velocity = new PVector(vx, vy);
     location = l.get();
     r = _r*random(3);
@@ -121,9 +121,9 @@ class ParticleSystem {
       }
       if (!(compareMouse())) {
         vx= 0;
-        vy= random(0, 1);
-        ax = random(-0.02, 0.04);
-        ay = random(0.1);
+        vy= random(0, 0.5);
+        ax = random(-0.02, 0.02);
+        ay = random(0.08);
         float r0 = random(1);
         color colorchange;
         if (r0 < 0.5) {
