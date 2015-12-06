@@ -12,12 +12,13 @@ class Particle {
   boolean isFlowerRun;
   float X;
   float Y;
+  float offsetX;
 
-  Particle(PVector l, float _r, color _c, float vx, float vy, float ax, float ay, boolean isFRun, ParticleSystem ps) {
-    acceleration = new PVector(ax, ay); 
+  Particle(PVector l, float _offsetX float _r, color _c, float vx, float vy, float ax, float ay, boolean isFRun, ParticleSystem ps) {
+    acceleration = new PVector(ax, ay); //new PVector(0, random(-0.05, 0.05));
     velocity = new PVector(vx, vy);
     location = l.get();
-    r = _r * (random(3)+ 0.01);
+    r = _r*random(3);
     particles = new ArrayList<Particle>();
     isFlowerRun = isFRun;
 
@@ -26,6 +27,7 @@ class Particle {
     c = _c;
     X = ps.mseX;
     Y = ps.mseY;
+    offsetX = _offsetX;
   }
 
   void run(){
@@ -50,7 +52,7 @@ class Particle {
     stroke(0, lifespan);
     strokeWeight(0);
     fill(c, lifespan);
-    ellipse(location.x, location.y, r, r);
+    ellipse(location.x + offsetX, location.y, r, r);
   }
 
   // Method to update location
@@ -62,7 +64,7 @@ class Particle {
     stroke(0, lifespan);
     strokeWeight(0);
     fill(c, lifespan);
-    ellipse(location.x, location.y, r, r);
+    ellipse(location.x + offsetX, location.y, r, r);
   }
 
   boolean isDead() {
@@ -88,15 +90,16 @@ class ParticleSystem {
   boolean isFlower;
   boolean isOver;
 
-  float mseX, mseY, prevMseX, prevMseY;
+  float mseX, mseY, prevMseX, prevMseY, offsetX;
 
-  ParticleSystem(PVector location, float r, color[] _colors)  {
+  ParticleSystem(PVector location, float r, color[] _colors, float _offsetX)  {
     origin = location.get();
     particles = new ArrayList<Particle>();
     isStart = false;
     isFlower = false;
     isOver = false;
     colors = _colors;
+    offsetX = _offsetX;
   }
 
   void addParticle() {
@@ -117,13 +120,13 @@ class ParticleSystem {
         }else{
           colorchange = lerpColor(colors[2], colors[3], random(1));
         }
-        particles.add(new Particle (origin, r, colorchange, vx, vy, ax, ay, true, self));
+        particles.add(new Particle (origin, offsetX, r, colorchange, vx, vy, ax, ay, true, self));
       }
       if (!(compareMouse())) {
         vx= 0;
-        vy= random(0, 0.5);
-        ax = random(-0.02, 0.02);
-        ay = random(0.08);
+        vy= random(0, 1);
+        ax = random(-0.02, 0.04);
+        ay = random(0.1);
         float r0 = random(1);
         color colorchange;
         if (r0 < 0.5) {
@@ -131,7 +134,7 @@ class ParticleSystem {
         }else{
           colorchange = lerpColor(colors[2], colors[3], random(1));
         }
-      particles.add(new Particle (origin, r, colorchange, vx, vy, ax, ay, false, self));
+      particles.add(new Particle (origin, offsetX, r, colorchange, vx, vy, ax, ay, false, self));
       }
     }
 
