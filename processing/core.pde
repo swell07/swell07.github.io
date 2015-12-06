@@ -17,7 +17,7 @@ class Particle {
     acceleration = new PVector(ax, ay); 
     velocity = new PVector(vx, vy);
     location = l.get();
-    r = _r*random(3);
+    r = _r * (random(3)+ 0.01);
     particles = new ArrayList<Particle>();
     isFlowerRun = isFRun;
 
