@@ -18,7 +18,7 @@ class Particle {
     acceleration = new PVector(ax, ay); //new PVector(0, random(-0.05, 0.05));
     velocity = new PVector(vx, vy);
     location = l.get();
-    r = _r*random(3);
+    r = _r * (random(3)+0.01);
     particles = new ArrayList<Particle>();
     isFlowerRun = isFRun;
 
@@ -30,12 +30,12 @@ class Particle {
     offsetX = _offsetX;
   }
 
-  void run(){
-      if (isFlowerRun){
-        flowerRun();
-      }else{
-        normalRun();
-      }
+  void run() {
+    if (isFlowerRun) {
+      flowerRun();
+    } else {
+      normalRun();
+    }
   }
 
   void flowerRun() {
@@ -92,7 +92,7 @@ class ParticleSystem {
 
   float mseX, mseY, prevMseX, prevMseY, offsetX;
 
-  ParticleSystem(PVector location, float r, color[] _colors, float _offsetX)  {
+  ParticleSystem(PVector location, float r, color[] _colors, float _offsetX) {
     origin = location.get();
     particles = new ArrayList<Particle>();
     isStart = false;
@@ -103,7 +103,7 @@ class ParticleSystem {
   }
 
   void addParticle() {
-    if (!isOver){
+    if (!isOver) {
       ParticleSystem self = (ParticleSystem)this;
       if ( compareMouse() ) {
         speed = random(0.01, 1);
@@ -117,7 +117,7 @@ class ParticleSystem {
         color colorchange;
         if (r0 < 0.5) {
           colorchange = lerpColor(colors[0], colors[1], random(1));
-        }else{
+        } else {
           colorchange = lerpColor(colors[2], colors[3], random(1));
         }
         particles.add(new Particle (origin, offsetX, r, colorchange, vx, vy, ax, ay, true, self));
@@ -131,23 +131,23 @@ class ParticleSystem {
         color colorchange;
         if (r0 < 0.5) {
           colorchange = lerpColor(colors[0], colors[1], random(1));
-        }else{
+        } else {
           colorchange = lerpColor(colors[2], colors[3], random(1));
         }
-      particles.add(new Particle (origin, offsetX, r, colorchange, vx, vy, ax, ay, false, self));
+        particles.add(new Particle (origin, offsetX, r, colorchange, vx, vy, ax, ay, false, self));
       }
     }
 
     for (int i = particles.size()-1; i >= 0; i--) {
-        Particle p = particles.get(i);
-        p.run();
-        if (p.isDead()) {
-          particles.remove(i);
-        }
+      Particle p = particles.get(i);
+      p.run();
+      if (p.isDead()) {
+        particles.remove(i);
+      }
     }
   }
 
-  void updateOrigin(){
+  void updateOrigin() {
     origin = new PVector(mseX, mseY);
   }
 
@@ -169,7 +169,7 @@ class ParticleSystem {
     }
   }
 
-  void destory(){
+  void destory() {
     isOver = true;
   }
 }
