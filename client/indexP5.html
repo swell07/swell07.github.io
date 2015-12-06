@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TouchTouch</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    /* to remove the top and left whitespace */
+    
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden
+    }
+    /* just to be sure these are full screen*/
+    
+    #touch {
+        display: block;
+    }
+    /* To remove the scrollbars */
+
+    </style>
+</head>
+
+<body ontouchmove="event.preventDefault()">
+    <!-- <canvas class="" id="touch" data-processing-sources="../processing/core.pde ../processing/client.pde"></canvas>
+    <script>
+    (function() {
+        var canvas = document.getElementById('touch');
+        // resize the canvas to fill browser window dynamically
+        window.addEventListener('resize', resizeCanvas, false);
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+    })();
+
+    </script> -->
+
+    <script charset="utf-8" src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- <script charset="utf-8" src="../bower_components/Processing.js/processing.js"></script> -->
+    <script charset="utf-8" src="../bower_components/leancloud-realtime/dist/AV.realtime.js"></script>
+
+    <!-- p5 -->
+    <script charset="utf-8" src="../bower_components/p5.js/lib/p5.min.js"></script>
+    <script charset="utf-8" src="../bower_components/p5.js/lib/addons/p5.sound.min.js"></script>
+    <!-- <script src="../p5/core.js" charset="utf-8"></script> -->
+    <script src="../p5/core.js" charset="utf-8"></script>
+    <script src="../processing2p5/core.js" charset="utf-8"></script>
+    <script src="../processing2p5/client.js" charset="utf-8"></script>
+    <!-- p5end -->
+
+    <script charset="utf-8" src="./script.js"></script>
+</body>
+
+</html>
