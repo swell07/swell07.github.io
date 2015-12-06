@@ -23,7 +23,7 @@ void draw() {
   }
 }
 
-void mousePressed(){
+void mousePressed(MouseEvent e){
   ps.isOver = false;
   ps.updateMouse(mouseX, mouseY);
   sendEvent('down',{
@@ -36,7 +36,7 @@ void mousePressed(){
   playnotes('Single_Mode',mouseX,mouseY)
 }
 
-void mouseDragged(){
+void mouseDragged(MouseEvent e){
   ps.updateMouse(mouseX, mouseY);
   sendEvent('move',{
     x:mouseX,
@@ -47,7 +47,7 @@ void mouseDragged(){
   updatenotes('Single_Mode',mouseX,mouseY)
 }
 
-void mouseReleased(){
+void mouseReleased(MouseEvent e){
   ps.updateMouse(mouseX, mouseY);
   ps.isOver = true;
   // ps = null;
