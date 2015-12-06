@@ -18,7 +18,7 @@ void draw( ) {
     ps = (ParticleSystem)me.getValue();
     if (ps){
       ps.addParticle();
-      ps.updateMouse(ps.mseX+ offsetX,ps.mseY);
+      ps.updateMouse(ps.mseX+ offsetX, ps.mseY);
     }
   }
 }
