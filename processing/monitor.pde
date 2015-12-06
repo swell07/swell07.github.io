@@ -25,7 +25,7 @@ void initUser(String keys, float x, float y) {
   if (!ps){
     char c = keys.charAt(keys.length() - 1);
     int a = c % 3; //0,1,2
-    float offsetX = a * 300 + ceil(random(200)); //ceil(random(200))*(a+1);
+    float offsetX = a * width/3 + ceil(random(200)); //ceil(random(200))*(a+1);
 
     color[][] colors = {
     {color(130, 0, 255), color(255, 0, 255), color(0, 130, 255), color(0, 255, 255)},
