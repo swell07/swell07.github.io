@@ -14,7 +14,7 @@ class Particle {
   float Y;
   float offsetX;
 
-  Particle(PVector l, float _offsetX float _r, color _c, float vx, float vy, float ax, float ay, boolean isFRun, ParticleSystem ps) {
+  Particle(PVector l, float _offsetX, float _r, color _c, float vx, float vy, float ax, float ay, boolean isFRun, ParticleSystem ps) {
     acceleration = new PVector(ax, ay); //new PVector(0, random(-0.05, 0.05));
     velocity = new PVector(vx, vy);
     location = l.get();
