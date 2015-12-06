@@ -2,13 +2,12 @@
 
 var scaleArray = [60, 62, 64, 65, 67, 69, 71, 72];
 
-// function setup() {
-//   createCanvas(710, 200);
-//   noStroke();
-// }
-//
-// function draw() {
-// }
+function setup() {
+    createCanvas(710, 200);
+    noStroke();
+}
+
+function draw() {}
 
 var envelopes = {};
 
