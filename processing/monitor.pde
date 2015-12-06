@@ -28,7 +28,7 @@ void initUser(String keys, float x, float y) {
   if (!ps){
     char c = keys.charAt(keys.length() - 1);
     int a = c % 3; //0,1,2
-    //offsetX = random(200)*(a+1);
+    float offsetX = 200;/random(200)*(a+1);
 
     color[][] colors = {
     {color(130, 0, 255), color(255, 0, 255), color(0, 130, 255), color(0, 255, 255)},
@@ -36,7 +36,7 @@ void initUser(String keys, float x, float y) {
     {color(255, 130, 0), color(255, 255, 0), color(255, 0, 130), color(255, 0, 255)}
   };
 
-    ps = new ParticleSystem(new PVector(width/2, 50), 5, colors[a])// random(200)*(a+1));
+    ps = new ParticleSystem(new PVector(width/2, 50), 5, colors[a], offsetX);
   }
   ps.isOver = false;
   ps.updateMouse(x, y)
