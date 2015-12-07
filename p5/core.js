@@ -1,5 +1,3 @@
-var scaleArray = [60, 62, 64, 65, 67, 69, 71, 72];
-
 function setup() {
     createCanvas(710, 200);
     noStroke();
@@ -103,9 +101,9 @@ function stopnotes(uid, mx, my) {
 function updatenotes(uid, mx, my) {
     var player = getPlayer(uid);
     if (player.mode == 1) {
-      var filterFreq = map (my, 0, width, 10, 22050);
+      var filterFreq = map (my, 0, width, 20, 8000);
       // Map mouseY to resonance/width
-      var filterWidth = map(mx, 0, height, 0, 90);
+      var filterWidth = map(mx, 0, height, 0, 60);
       var filter = player.resources.filter;
       filter.set(filterFreq, filterWidth);
       player.resources.noise.pan(2 * mx/width - 1, 0.1)
