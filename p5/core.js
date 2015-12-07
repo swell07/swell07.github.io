@@ -26,6 +26,7 @@ function getPlayer(uid) {
     if (!players[uid]) {
         //decide mode
         var mode = ceil(random(2));
+        println(mode);
         // mode is decided
         //var mode = 1;
 
