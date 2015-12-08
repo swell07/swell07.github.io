@@ -30,30 +30,17 @@
 </head>
 
 <body ontouchmove="event.preventDefault()">
-    <canvas class="" id="touch" data-processing-sources="../processing/core.pde ../processing/client.pde"></canvas>
-    <script>
-    (function() {
-        var canvas = document.getElementById('touch');
-        // resize the canvas to fill browser window dynamically
-        window.addEventListener('resize', resizeCanvas, false);
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-    })();
-
-    </script>
-
     <script charset="utf-8" src="../bower_components/jquery/dist/jquery.min.js"></script>
-    <script charset="utf-8" src="../bower_components/Processing.js/processing.js"></script>
     <script charset="utf-8" src="../bower_components/leancloud-realtime/dist/AV.realtime.js"></script>
 
     <!-- p5 -->
     <script charset="utf-8" src="../bower_components/p5.js/lib/p5.min.js"></script>
     <script charset="utf-8" src="../bower_components/p5.js/lib/addons/p5.sound.min.js"></script>
-    <script src="../p5/core.js" charset="utf-8"></script>
+    <script src="../bower_components/p5.js/lib/addons/p5.dom.js" charset="utf-8"></script>
+    <!-- load scripts -->
+    <script src="../p5/core_sound.js" charset="utf-8"></script>
+    <script src="../p5/core_video.js" charset="utf-8"></script>
+    <script src="../p5/client.js" charset="utf-8"></script>
     <!-- p5end -->
 
     <script charset="utf-8" src="./script.js"></script>

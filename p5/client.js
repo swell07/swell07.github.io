@@ -1,9 +1,9 @@
 var ps; //particle system
+var colors;
 
 function setup() {
     createCanvas(screen.width, screen.height);
-
-    var colors = [
+    colors = [
         [
             color(130, 0, 255), color(255, 0, 255), color(0, 130, 255), color(0, 255, 255)
         ],

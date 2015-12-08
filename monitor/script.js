@@ -1,7 +1,5 @@
 // 分配接收到的事件
 function dispatchAction(user, events) {
-    var processingInstance;
-    processingInstance = Processing.getInstanceById('touch');
     var begin = events[0].at - 10;
     for (var i = 0; i < events.length; i++) {
         var event = events[i];
@@ -11,8 +9,7 @@ function dispatchAction(user, events) {
             case 'down':
                 setTimeout((function(user, option) {
                     return function() {
-                        processingInstance.initUser(user, option.x, option.y);
-
+                        initUser(user, option.x, option.y);
                         //p5
                         playnotes(user, option.x, option.y);
                     }
@@ -23,8 +20,7 @@ function dispatchAction(user, events) {
             case 'up':
                 setTimeout((function(user, option) {
                     return function() {
-                        processingInstance.delUser(user, option.x, option.y);
-
+                        delUser(user, option.x, option.y);
                         //p5
                         stopnotes(user, option.x, option.y);
                     }
@@ -35,14 +31,11 @@ function dispatchAction(user, events) {
             case 'move':
                 setTimeout((function(user, option) {
                     return function() {
-                        processingInstance.updateUser(user, option.x, option.y);
-
+                        updateUser(user, option.x, option.y);
                         //p5
                         updatenotes(user, option.x, option.y);
                     }
                 })(user, option), event.at - begin)
-
-
                 break;
             default:
                 console.log(event)

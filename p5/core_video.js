@@ -32,7 +32,7 @@ function Particle(l, _r, _c, vx, vy, ax, ay, isFRun, ps) {
 
         stroke(0, me.lifespan);
         strokeWeight(0);
-        fill(me.c, me.lifespan);
+        fill(me.c.levels[0], me.c.levels[1], me.c.levels[2], me.lifespan);
         ellipse(me.location.x, me.location.y, me.r, me.r);
     }
 
@@ -43,7 +43,7 @@ function Particle(l, _r, _c, vx, vy, ax, ay, isFRun, ps) {
 
         stroke(0, me.lifespan);
         strokeWeight(0);
-        fill(me.c, me.lifespan);
+        fill(me.c.levels[0], me.c.levels[1], me.c.levels[2], me.lifespan);
         ellipse(me.location.x, me.location.y, me.r, me.r);
     }
 
