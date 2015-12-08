@@ -35,41 +35,41 @@ function draw() {
     }
 }
 
-function mousePressed() {
+function touchStarted() {
     ps.isOver = false;
-    ps.updateMouse(mouseX, mouseY);
+    ps.updateMouse(touchX, touchY);
     sendEvent('down', {
-        x: mouseX,
-        y: mouseY,
+        x: touchX,
+        y: touchY,
         h: height,
         w: width
     })
 
     //p5
     background(20);
-    playnotes(userId, mouseX, mouseY, width, height)
+    playnotes(userId, touchX, touchY, width, height)
 }
 
-function mouseDragged() {
-    ps.updateMouse(mouseX, mouseY);
+function touchMoved() {
+    ps.updateMouse(touchX, touchY);
     sendEvent('move', {
-        x: mouseX,
-        y: mouseY,
+        x: touchX,
+        y: touchY,
         h: height,
         w: width
     })
 
     //p5
-    updatenotes(userId, mouseX, mouseY, width, height)
+    updatenotes(userId, touchX, touchY, width, height)
 }
 
-function mouseReleased() {
-    ps.updateMouse(mouseX, mouseY);
+function touchEnded() {
+    ps.updateMouse(touchX, touchY);
     ps.isOver = true;
     // ps = null;
     sendEvent('up', {
-        x: mouseX,
-        y: mouseY,
+        x: touchX,
+        y: touchY,
         h: height,
         w: width
     })
@@ -77,5 +77,5 @@ function mouseReleased() {
 
     //p5
     background(180);
-    stopnotes(userId, mouseX, mouseY, width, height)
+    stopnotes(userId, touchX, touchY, width, height)
 }
