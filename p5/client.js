@@ -1,5 +1,10 @@
 var ps; //particle system
 var colors;
+var userId = clientId ? clientId : 'Single';
+
+function getIndexFromId(userId, N) { //return one int from 0,1,...,N-1
+    return userId ? userId[userId.length - 1] % N : 0;
+}
 
 function setup() {
     createCanvas(screen.width, screen.height);
@@ -14,7 +19,8 @@ function setup() {
             color(255, 130, 0), color(255, 255, 0), color(255, 0, 130), color(255, 0, 255)
         ]
     ];
-    ps = new ParticleSystem(createVector(width / 2, 50), 5, colors[floor(random(colors.length))]);
+
+    ps = new ParticleSystem(createVector(width / 2, 50), 5, colors[getIndexFromId(userId, 3)]);
     ps.isOver = true;
 }
 
@@ -39,7 +45,7 @@ function mousePressed() {
 
     //p5
     background(20);
-    playnotes('Single_Mode', mouseX, mouseY, width, height)
+    playnotes(userId, mouseX, mouseY, width, height)
 }
 
 function mouseDragged() {
@@ -52,7 +58,7 @@ function mouseDragged() {
     })
 
     //p5
-    updatenotes('Single_Mode', mouseX, mouseY, width, height)
+    updatenotes(userId, mouseX, mouseY, width, height)
 }
 
 function mouseReleased() {
@@ -69,5 +75,5 @@ function mouseReleased() {
 
     //p5
     background(180);
-    stopnotes('Single_Mode', mouseX, mouseY, width, height)
+    stopnotes(userId, mouseX, mouseY, width, height)
 }

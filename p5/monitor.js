@@ -1,6 +1,11 @@
 var users = {}; //users HashMap
 var colors = {}
 
+function getIndexFromId(userId, N) { //return one int from 0,1,...,N-1
+    return userId ? (userId[userId.length - 1] % N) : 0;
+}
+
+
 function setup() {
     createCanvas(screen.width, screen.height)
     colors = [
@@ -33,7 +38,7 @@ function draw() {
 function initUser(userId, x, y, cw, ch) {
     var ps = users[userId]
     if (!ps) {
-        var index = (userId[userId.length - 1]) % 3; //0,1,2
+        var index = getIndexFromId(userId, 3); //0,1,2
         ps = new ParticleSystem(createVector(width / 2, 50), 5, colors[index]);
     }
     ps.isOver = false;

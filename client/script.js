@@ -2,8 +2,10 @@
 //配置ID
 var appId = 'AyW11ncR4mOBfzb8r8GsE9uY';
 var roomId = '5659bc8460b24d2f52fa964a';
+
 // 每个客户端自定义的 id
 var clientId = 'USER' + Math.random().toString();
+
 // 用来存储 realtimeObject
 var rt;
 // 用来存储创建好的 roomObject
