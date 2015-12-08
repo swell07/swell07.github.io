@@ -3,7 +3,7 @@ var filterType = ['lowpass', 'bandpass', 'highpass'];
 var delaytime = [0.2, 0.4, 0.8];
 
 function setup() {
-    createCanvas(710, 200);
+    noCanvas();
     noStroke();
 }
 
@@ -96,8 +96,21 @@ function getPlayer(uid) {
           delay.feedback(0.4);
           volume.amp(0.8);
           oscVolume.amp(0);
-          feedbackGain.amp(0.6);
+          //feedbackGain.amp(0.6);
+          delay.amp(0.6);
           modVolume.gain.value = 500;
+
+          modLFO.connect(modVolume);
+          modVolume.connect(source.oscillator.detune);
+          source.connect(oscVolume);
+          oscVolume.connect(filter);
+          filter.connect(compressor);
+          filter.connect(delay);
+          delay.connect(feedbackGain);
+          delay.connect(compressor);
+          feedbackGain.connect(delay);
+          compressor.connect(volume);
+          volume.connect(getAudioContext().destination);
 
           var res = {
           'source': source,
@@ -135,7 +148,8 @@ function playnotes(uid, mx, my) {
       player.resources.noise.pan(2 * mx / width - 1, 0.1)
       player.resources.noise.amp(0.8, 1);
     } else if (player.mode == 3) {
-      routeSound(uid);
+      //routeSound(uid);
+      player.resources.oscVolume.amp(0.8);
       player.resources.source.start();
     }
 
@@ -173,29 +187,29 @@ function updatenotes(uid, mx, my) {
         filter.set(filterFreq, filterRes);
         player.resources.noise.pan(2 * mx / width - 1, 0.1)
     } else if (player.mode == 3) {
-        var sourceFreq = map(mouseX, 0, width, 50, 400);//300, 800
+        var sourceFreq = map(mx, 0, width, 50, 400);//300, 800
         player.resources.source.freq(sourceFreq);
 
-        var filterFreq = map(mouseY, 0, height, 100, 300);//400,2000
+        var filterFreq = map(my, 0, height, 100, 300);//400,2000
         player.resources.filter.freq(filterFreq);//getFilterFreq(mouseY * 10));//mouseY*10);//
-        var filterRes = map(mouseY, 0, height, 15, 5);
+        var filterRes = map(my, 0, height, 15, 5);
         player.resources.filter.res(filterRes);
     }
 }
 
-function routeSound(uid){
-   var player = getPlayer(uid);
-   if (player.mode == 3 ){//|| player.mode == 4){
-    player.resources.modLFO.connect(player.resources.modVolume);
-    player.resources.modVolume.connect(player.resources.source.oscillator.detune);
-    player.resources.source.connect(player.resources.oscVolume);
-    player.resources.oscVolume.connect(player.resources.filter);
-    player.resources.filter.connect(player.resources.compressor);
-    player.resources.filter.connect(player.resources.delay);
-    player.resources.delay.connect(player.resources.feedbackGain);
-    player.resources.delay.connect(player.resources.compressor);
-    player.resources.feedbackGain.connect(player.resources.delay);
-    player.resources.compressor.connect(player.resources.volume);
-    player.resources.volume.connect(getAudioContext().destination);
- }
-}
+// function routeSound(uid){
+//    var player = getPlayer(uid);
+//    if (player.mode == 3 ){//|| player.mode == 4){
+//     player.resources.modLFO.connect(player.resources.modVolume);
+//     player.resources.modVolume.connect(player.resources.source.oscillator.detune);
+//     player.resources.source.connect(player.resources.oscVolume);
+//     player.resources.oscVolume.connect(player.resources.filter);
+//     player.resources.filter.connect(player.resources.compressor);
+//     player.resources.filter.connect(player.resources.delay);
+//     player.resources.delay.connect(player.resources.feedbackGain);
+//     player.resources.delay.connect(player.resources.compressor);
+//     player.resources.feedbackGain.connect(player.resources.delay);
+//     player.resources.compressor.connect(player.resources.volume);
+//     player.resources.volume.connect(getAudioContext().destination);
+//  }
+// }
