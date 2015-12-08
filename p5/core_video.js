@@ -67,10 +67,10 @@ function ParticleSystem(location, r, colors) {
     me.isOver = false;
     me.colors = colors;
     me.r = 5;
-    me.mseX = 0;
-    me.mseY = 0;
-    me.prevMseX = 0;
-    me.prevMseY = 0;
+    me.mseX = 0.001;
+    me.mseY = 0.002;
+    me.prevMseX = 0.003;
+    me.prevMseY = 0.004;
     //init end
 
     me.addParticle = function() {
@@ -90,16 +90,17 @@ function ParticleSystem(location, r, colors) {
                 var vy = random(0, 1);
                 var ax = random(-0.02, 0.04);
                 var ay = random(0.1);
-                var colorchange = (random(1) < 0.5) ? colorchange = lerpColor(colors[0], colors[1], random(1)) : colorchange = lerpColor(colors[2], colors[3], random(1));
+                var colorchange = (random(1) < 0.5) ? colorchange = lerpColor(colors[0], colors[1], random(1)) : lerpColor(colors[2], colors[3], random(1));
                 me.particles.push(new Particle(me.origin, me.r, colorchange, vx, vy, ax, ay, false, me));
             }
         }
-
-        for (var i = me.particles.length - 1; i >= 0; i--) {
-            p = me.particles[i];
-            p.run()
-            if (p.isDead()) {
-                me.particles.splice(i, 1)
+        if (me.particles.length > 0) {
+            for (var i = me.particles.length - 1; i >= 0; i--) {
+                p = me.particles[i];
+                p.run()
+                if (p.isDead()) {
+                    me.particles.splice(i, 1)
+                }
             }
         }
     }
