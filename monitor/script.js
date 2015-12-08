@@ -10,8 +10,6 @@ function dispatchAction(user, events) {
                 setTimeout((function(user, option) {
                     return function() {
                         initUser(user, option.x, option.y, option.cw, option.ch);
-                        //p5
-                        playnotes(user, option.x, option.y, option.cw, option.ch);
                     }
                 })(user, option), event.at - begin);
 
@@ -21,8 +19,6 @@ function dispatchAction(user, events) {
                 setTimeout((function(user, option) {
                     return function() {
                         delUser(user, option.x, option.y, option.cw, option.ch);
-                        //p5
-                        stopnotes(user, option.x, option.y, option.cw, option.ch);
                     }
                 })(user, option), event.at - begin)
 
@@ -32,8 +28,6 @@ function dispatchAction(user, events) {
                 setTimeout((function(user, option) {
                     return function() {
                         updateUser(user, option.x, option.y, option.cw, option.ch);
-                        //p5
-                        updatenotes(user, option.x, option.y, option.cw, option.ch);
                     }
                 })(user, option), event.at - begin)
                 break;

@@ -38,6 +38,9 @@ function draw() {
 
 //void initUser(String keys, float x, float y)
 function initUser(userId, x, y, cw, ch) {
+    //sound
+    playnotes(userId, x, y, cw, ch)
+
     var ps = users[userId]
     if (!ps) {
         var index = getIndexFromId(userId, 3); //0,1,2
@@ -49,6 +52,8 @@ function initUser(userId, x, y, cw, ch) {
 }
 
 function updateUser(userId, x, y, cw, ch) {
+    //sound
+    updatenotes(userId, x, y, cw, ch)
     var ps = users[userId]
     if (ps) {
         ps.updateMouse(x, y)
@@ -57,6 +62,8 @@ function updateUser(userId, x, y, cw, ch) {
 }
 
 function delUser(userId, x, y, cw, ch) {
+    //sound
+    stopnotes(userId, x, y, cw, ch)
     var ps = users[userId]
     if (ps) {
         ps.updateMouse(x, y)
