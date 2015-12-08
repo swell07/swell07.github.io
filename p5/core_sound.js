@@ -51,7 +51,7 @@ function getPlayer(uid) {
 
 var oscs = [];
 
-function playnotes(uid, mx, my) {
+function playnotes(uid, mx, my, cw, ch) {
     var player = getPlayer(uid);
     if (player.mode == 1) {
         player.resources.noise.start();
@@ -66,7 +66,7 @@ function playnotes(uid, mx, my) {
 
 }
 
-function stopnotes(uid, mx, my) {
+function stopnotes(uid, mx, my, cw, ch) {
     var player = getPlayer(uid);
     if (player.mode == 1) {
         player.resources.noise.amp(0, 1);
@@ -77,7 +77,7 @@ function stopnotes(uid, mx, my) {
 
 }
 
-function updatenotes(uid, mx, my) {
+function updatenotes(uid, mx, my, cw, ch) {
     var player = getPlayer(uid);
     if (player.mode == 1) {
         var filterFreq = map(my, 0, width, 20, 8000);

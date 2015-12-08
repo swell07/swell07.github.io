@@ -9,9 +9,9 @@ function dispatchAction(user, events) {
             case 'down':
                 setTimeout((function(user, option) {
                     return function() {
-                        initUser(user, option.x, option.y);
+                        initUser(user, option.x, option.y, option.cw, option.ch);
                         //p5
-                        playnotes(user, option.x, option.y);
+                        playnotes(user, option.x, option.y, option.cw, option.ch);
                     }
                 })(user, option), event.at - begin);
 
@@ -20,9 +20,9 @@ function dispatchAction(user, events) {
             case 'up':
                 setTimeout((function(user, option) {
                     return function() {
-                        delUser(user, option.x, option.y);
+                        delUser(user, option.x, option.y, option.cw, option.ch);
                         //p5
-                        stopnotes(user, option.x, option.y);
+                        stopnotes(user, option.x, option.y, option.cw, option.ch);
                     }
                 })(user, option), event.at - begin)
 
@@ -31,9 +31,9 @@ function dispatchAction(user, events) {
             case 'move':
                 setTimeout((function(user, option) {
                     return function() {
-                        updateUser(user, option.x, option.y);
+                        updateUser(user, option.x, option.y, option.cw, option.ch);
                         //p5
-                        updatenotes(user, option.x, option.y);
+                        updatenotes(user, option.x, option.y, option.cw, option.ch);
                     }
                 })(user, option), event.at - begin)
                 break;

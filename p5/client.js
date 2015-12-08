@@ -32,23 +32,27 @@ function mousePressed() {
     ps.updateMouse(mouseX, mouseY);
     sendEvent('down', {
         x: mouseX,
-        y: mouseY
+        y: mouseY,
+        h: height,
+        w: width
     })
 
     //p5
     background(20);
-    playnotes('Single_Mode', mouseX, mouseY)
+    playnotes('Single_Mode', mouseX, mouseY, width, height)
 }
 
 function mouseDragged() {
     ps.updateMouse(mouseX, mouseY);
     sendEvent('move', {
         x: mouseX,
-        y: mouseY
+        y: mouseY,
+        h: height,
+        w: width
     })
 
     //p5
-    updatenotes('Single_Mode', mouseX, mouseY)
+    updatenotes('Single_Mode', mouseX, mouseY, width, height)
 }
 
 function mouseReleased() {
@@ -57,11 +61,13 @@ function mouseReleased() {
     // ps = null;
     sendEvent('up', {
         x: mouseX,
-        y: mouseY
+        y: mouseY,
+        h: height,
+        w: width
     })
     sendEvents();
 
     //p5
     background(180);
-    stopnotes('Single_Mode', mouseX, mouseY)
+    stopnotes('Single_Mode', mouseX, mouseY, width, height)
 }

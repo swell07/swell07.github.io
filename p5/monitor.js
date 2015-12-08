@@ -30,7 +30,7 @@ function draw() {
 }
 
 //void initUser(String keys, float x, float y)
-function initUser(userId, x, y) {
+function initUser(userId, x, y, cw, ch) {
     var ps = users[userId]
     if (!ps) {
         var index = (userId[userId.length - 1]) % 3; //0,1,2
@@ -41,7 +41,7 @@ function initUser(userId, x, y) {
     users[userId] = ps;
 }
 
-function updateUser(userId, x, y) {
+function updateUser(userId, x, y, cw, ch) {
     var ps = users[userId]
     if (ps) {
         ps.updateMouse(x, y)
@@ -49,7 +49,7 @@ function updateUser(userId, x, y) {
     }
 }
 
-function delUser(userId, x, y) {
+function delUser(userId, x, y, cw, ch) {
     var ps = users[userId]
     if (ps) {
         ps.updateMouse(x, y)
