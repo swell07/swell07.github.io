@@ -25,9 +25,10 @@ var MAX_OSC_SIZE = 3;
 function getPlayer(uid) {
     if (!players[uid]) {
         //decide mode
-        var mode = ceil(random(2));
+       
+        //var mode = ceil(random(2));
         // mode is decided
-        // var mode = 1;
+         var mode = 1;
 
         if (mode == 1) {
           var filter = new p5.BandPass()
