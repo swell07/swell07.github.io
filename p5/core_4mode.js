@@ -83,7 +83,7 @@ function getPlayer(uid) {
 
           source.disconnect();
           filter.disconnect();
-          modLF0.disconnect();
+          modLFO.disconnect();
           delay.disconnect();
           volume.disconnect();
           oscVolume.disconnect();
@@ -91,7 +91,7 @@ function getPlayer(uid) {
           compressor.disconnect();
 
           //palyer init or playnote?????
-          modLF0.freq(400);
+          modLFO.freq(400);
           delay.delayTime(delaytime[1]);
           delay.feedback(0.4);
           volume.amp(0.8);
@@ -102,7 +102,7 @@ function getPlayer(uid) {
           var res = {
           'source': source,
           'filter': filter,
-          'modLF0': modLFO,
+          'modLFO': modLFO,
           'delay': delay,
           'voluem': volume,
           'oscVolume': oscVolume,
@@ -135,7 +135,7 @@ function playnotes(uid, mx, my) {
       player.resources.noise.pan(2 * mx / width - 1, 0.1)
       player.resources.noise.amp(0.8, 1);
     } else if (player.mode == 3) {
-      routeSound();
+      routeSound(uid);
       player.resources.source.start();
     }
 
@@ -183,9 +183,9 @@ function updatenotes(uid, mx, my) {
     }
 }
 
-function routeSound(){
-  // var player = getPlayer(uid);
-  // if (player.mode == 3 || player.mode == 4){
+function routeSound(uid){
+   var player = getPlayer(uid);
+   if (player.mode == 3 ){//|| player.mode == 4){
     player.resources.modLFO.connect(player.resources.modVolume);
     player.resources.modVolume.connect(player.resources.source.oscillator.detune);
     player.resources.source.connect(player.resources.oscVolume);
@@ -197,4 +197,5 @@ function routeSound(){
     player.resources.feedbackGain.connect(player.resources.delay);
     player.resources.compressor.connect(player.resources.volume);
     player.resources.volume.connect(getAudioContext().destination);
+ }
 }
