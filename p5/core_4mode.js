@@ -1,6 +1,7 @@
 var waveform = ['sine', 'sawtooth', 'square', 'triangle'];
 var filterType = ['lowpass', 'bandpass', 'highpass'];
 var delaytime = [0.2, 0.4, 0.8];
+var feedback = [0.3, 0.4, 0.1];
 
 function setup() {
     noCanvas();
@@ -31,7 +32,8 @@ function getPlayer(uid) {
         //decide mode
         //var mode = ceil(random(4));
         // mode is decided
-        var mode = 3;
+        var mode = 1;
+        console.log(mode)
 
         if (mode == 1) {
           var filter = new p5.BandPass()
@@ -69,9 +71,10 @@ function getPlayer(uid) {
                 'resources': res
             }
         }
-        else if (mode == 3){
-          var i = floor(random(2))
-          var source = new p5.Oscillator(waveform[0])
+        else if (mode == 3 || mode == 4){
+          var i = floor(random(3))
+          var j = floor(random(4))
+          var source = new p5.Oscillator(waveform[j])
           var filter = new p5.Filter(filterType[0])
           var modLFO = new p5.Oscillator('sine')
           var delay = new p5.Delay()
@@ -132,84 +135,67 @@ function getPlayer(uid) {
     }
 
     return players[uid]
+
 }
 
 var oscs = [];
 
-function playnotes(uid, mx, my) {
+function playnotes(uid, mx, my, cw, ch) {
     var player = getPlayer(uid);
     if (player.mode == 1) {
+      player.resources.noise.pan(2 * mx/cw - 1, 0.1)
       player.resources.noise.start();
-      player.resources.noise.pan(2 * mx/width - 1, 0.1)
       player.resources.noise.amp(0.8, 1);
 
     } else if (player.mode == 2) {
+      player.resources.noise.pan(2 * mx/cw - 1, 0.1)
       player.resources.noise.start();
-      player.resources.noise.pan(2 * mx / width - 1, 0.1)
       player.resources.noise.amp(0.8, 1);
-    } else if (player.mode == 3) {
+    } else if (player.mode == 3 || player.mode == 4) {
       //routeSound(uid);
       player.resources.oscVolume.amp(0.8);
       player.resources.source.start();
     }
-
+    console.log(cw,ch)
 }
 
-function stopnotes(uid, mx, my) {
+function stopnotes(uid, mx, my, cw, ch) {
     var player = getPlayer(uid);
     if (player.mode == 1) {
         player.resources.noise.amp(0, 1);
     } else if (player.mode == 2) {
         player.resources.noise.amp(0, 1);
-    } else if (player.mode == 3) {
+    } else if (player.mode == 3 || player.mode == 4) {
         player.resources.oscVolume.amp(0);
     }
-
 }
 
-function updatenotes(uid, mx, my) {
+function updatenotes(uid, mx, my, cw, ch) {
     var player = getPlayer(uid);
     if (player.mode == 1) {
-      var filterFreq = map (my, 0, width, 20, 8000);
+      var filterFreq = map (my, 0, ch, 20, 8000);
       // Map mouseY to resonance/width
-      var filterWidth = map(mx, 0, height, 0, 60);
+      var filterWidth = map(mx, 0, cw, 0, 90);
       var filter = player.resources.filter;
       filter.set(filterFreq, filterWidth);
-      player.resources.noise.pan(2 * mx/width - 1, 0.1)
+      player.resources.noise.pan(2 * mx/cw - 1, 0.1)
 
     } else if (player.mode == 2) {
         //filter frequency range/height
-        var filterFreq = map(mx, 0, width, 200, 1500);
+        var filterFreq = map(mx, 0, cw, 200, 1500);
         //resonance/width
-        var filterRes = map(my, 0, height, 15, 23);
+        var filterRes = map(my, 0, ch, 15, 23);
         // set filter parameters
         var filter = player.resources.filter;
         filter.set(filterFreq, filterRes);
-        player.resources.noise.pan(2 * mx / width - 1, 0.1)
-    } else if (player.mode == 3) {
-        var sourceFreq = map(mx, 0, width, 50, 400);//300, 800
+        player.resources.noise.pan(2 * mx / cw - 1, 0.1)
+    } else if (player.mode == 3 || player.mode == 4) {
+        var sourceFreq = map(mx, 0, cw, 50, 400);//300, 800
         player.resources.source.freq(sourceFreq);
 
-        var filterFreq = map(my, 0, height, 100, 300);//400,2000
+        var filterFreq = map(my, 0, ch, 100, 300);//400,2000
         player.resources.filter.freq(filterFreq);//getFilterFreq(mouseY * 10));//mouseY*10);//
-        var filterRes = map(my, 0, height, 15, 5);
+        var filterRes = map(mx, 0, cw, 15, 5);
         player.resources.filter.res(filterRes);
     }
 }
-
-// function routeSound(uid){
-//    var player = getPlayer(uid);
-//    if (player.mode == 3 ){//|| player.mode == 4){
-//     player.resources.modLFO.connect(player.resources.modVolume);
-//     player.resources.modVolume.connect(player.resources.source.oscillator.detune);
-//     player.resources.source.connect(player.resources.oscVolume);
-//     player.resources.oscVolume.connect(player.resources.filter);
-//     player.resources.filter.connect(player.resources.compressor);
-//     player.resources.filter.connect(player.resources.delay);
-//     player.resources.delay.connect(player.resources.feedbackGain);
-//     player.resources.delay.connect(player.resources.compressor);
-//     player.resources.feedbackGain.connect(player.resources.delay);
-//     player.resources.compressor.connect(player.resources.volume);
-//     player.resources.volume.connect(getAudioContext().destination);
-//  }
-// }
