@@ -3,7 +3,7 @@ ParticleSystem ps;
 void setup() {
   //size($('#touch').width(), $('#touch').height(), P2D);
   size(screen.width, screen.height, P2D);
-  char c = clientId.charAt(keys.length() - 1);
+  char c = clientId.charAt(clientId.length() - 1);
   int a = c % 3;
   //int a  = floor(random(3));
   color[][] colors = {
