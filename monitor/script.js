@@ -9,7 +9,7 @@ function dispatchAction(user, events) {
             case 'down':
                 setTimeout((function(user, option) {
                     return function() {
-                        initUser(user, option.x, option.y, option.cw, option.ch);
+                        initUser(user, option.x, option.y, option.w, option.h);
                     }
                 })(user, option), event.at - begin);
 
@@ -18,7 +18,7 @@ function dispatchAction(user, events) {
             case 'up':
                 setTimeout((function(user, option) {
                     return function() {
-                        delUser(user, option.x, option.y, option.cw, option.ch);
+                        delUser(user, option.x, option.y, option.w, option.h);
                     }
                 })(user, option), event.at - begin)
 
@@ -27,7 +27,7 @@ function dispatchAction(user, events) {
             case 'move':
                 setTimeout((function(user, option) {
                     return function() {
-                        updateUser(user, option.x, option.y, option.cw, option.ch);
+                        updateUser(user, option.x, option.y, option.w, option.h);
                     }
                 })(user, option), event.at - begin)
                 break;
