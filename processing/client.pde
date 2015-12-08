@@ -33,7 +33,7 @@ void mousePressed(MouseEvent e){
 
   //p5
   background(20);
-  playnotes('Single_Mode',mouseX,mouseY)
+  playnotes(clientId, mouseX, mouseY)
 }
 
 void mouseDragged(MouseEvent e){
@@ -44,7 +44,7 @@ void mouseDragged(MouseEvent e){
   })
 
   //p5
-  updatenotes('Single_Mode',mouseX,mouseY)
+  updatenotes(clientId, mouseX, mouseY)
 }
 
 void mouseReleased(MouseEvent e){
@@ -59,5 +59,5 @@ void mouseReleased(MouseEvent e){
 
   //p5
   background(180);
-  stopnotes('Single_Mode',mouseX,mouseY)
+  stopnotes(clientId, mouseX, mouseY)
 }
