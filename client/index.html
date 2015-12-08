@@ -20,11 +20,33 @@
         overflow: hidden
     }
     /* just to be sure these are full screen*/
+    
+    .message {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 20px;
+        z-index: 1000;
+        text-align: center;
+        padding: 5px;
+    }
+    
+    .alert {
+        background-color: rgba(255, 0, 0, 0.5);
+    }
+    
+    .good {
+        background-color: rgba(49, 156, 59, 0.5)
+    }
 
     </style>
 </head>
 
 <body ontouchmove="event.preventDefault()">
+    <div class="message alert" id="msg">
+        Connecting...
+    </div>
     <script charset="utf-8" src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script charset="utf-8" src="../bower_components/leancloud-realtime/dist/AV.realtime.js"></script>
 

@@ -62,17 +62,20 @@ var firstFlag = true;
 
     // 监听服务情况
     rt.on('reuse', function() {
-        console.log('Reconnecting, please wait...');
+        $('#msg').removeClass('good').addClass('alert').html('Connecting...');
+        console.log('服务器正在重连，请耐心等待。。。');
     });
 
     // 监听错误
     rt.on('error', function() {
-        console.log('Connection error!');
+        $('#msg').removeClass('good').addClass('alert').html('Connecting...');
+        console.log('连接遇到错误。。。');
     });
 
     rt.on('open', function() {
         firstFlag = false;
-        console.log('Connected!!');
+        $('#msg').removeClass('alert').addClass('good').html('Connected!');
+        console.log('服务器连接成功！');
 
         // 获得已有房间的实例
         rt.room(roomId, function(object) {
