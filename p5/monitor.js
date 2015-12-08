@@ -1,5 +1,5 @@
 var users = {}; //users HashMap
-var colors = {}
+var colors = {};
 
 function getIndexFromId(userId, N) { //return one int from 0,1,...,N-1
     return userId ? (userId[userId.length - 1] % N) : 0;

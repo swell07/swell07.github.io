@@ -1,10 +1,29 @@
+//this script should be loaded after p5
+//this function requires p5
+function offset(option) {
+    if (option.w < width && option.h < height) {
+        var ox = floor(random(width - option.w));
+        var oy = floor(random(height - option.h));
+        return [ox, oy];
+    } else {
+        return [0, 0];
+    }
+}
+
 // 分配接收到的事件
 function dispatchAction(user, events) {
     var begin = events[0].at - 10;
+    var o = offset(events[0].option)
     for (var i = 0; i < events.length; i++) {
         var event = events[i];
         var name = event.name;
         var option = event.option;
+        //this part requires p5
+        option.x += o[0];
+        option.y += o[1];
+        option.w = width;
+        option.h = height;
+        //end
         switch (name) {
             case 'down':
                 setTimeout((function(user, option) {
