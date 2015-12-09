@@ -102,7 +102,7 @@ function getPlayer(uid) {
           volume.amp(0.8);
           oscVolume.amp(0);
           //feedbackGain.amp(0.6);
-          delay.amp(0.6, 0.2);
+          delay.amp(0.6, 0.05);
           modVolume.gain.value = floor(random(300, 500));
           
           console.log(delaytime[i1], feedback[i2])
@@ -156,7 +156,7 @@ function playnotes(uid, mx, my, cw, ch) {
       player.resources.noise.amp(0.8, 1);
     } else if (player.mode == 3 || player.mode == 4) {
       //routeSound(uid);
-      player.resources.oscVolume.amp(0.8);
+      player.resources.oscVolume.amp(0.7, 0.5);
       player.resources.source.start();
     }
     console.log(cw,ch)
@@ -169,7 +169,7 @@ function stopnotes(uid, mx, my, cw, ch) {
     } else if (player.mode == 2) {
         player.resources.noise.amp(0, 1);
     } else if (player.mode == 3 || player.mode == 4) {
-        player.resources.oscVolume.amp(0,1);
+        player.resources.oscVolume.amp(0, 1);
     }
 }
 
