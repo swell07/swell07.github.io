@@ -97,12 +97,12 @@ function getPlayer(uid) {
 
           //palyer init or playnote?????
           modLFO.freq(400);
-          delay.delayTime(delaytime[i1]);
-          delay.feedback(feedback[i2]);
+          delay.delayTime(0.2);//(delaytime[i1]);
+          delay.feedback(0.3);//(feedback[i2]);
           volume.amp(0.8);
           oscVolume.amp(0);
           //feedbackGain.amp(0.6);
-          delay.amp(0.6);
+          delay.amp(0.6, 0.2);
           modVolume.gain.value = floor(random(300, 500));
 
           modLFO.connect(modVolume);
