@@ -104,6 +104,8 @@ function getPlayer(uid) {
           //feedbackGain.amp(0.6);
           delay.amp(0.6, 0.2);
           modVolume.gain.value = floor(random(300, 500));
+          
+          console.log(delaytime[i1], feedback[i2])
 
           modLFO.connect(modVolume);
           modVolume.connect(source.oscillator.detune);
