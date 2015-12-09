@@ -105,7 +105,7 @@ function getPlayer(uid) {
           delay.amp(0.6, 0.2);
           modVolume.gain.value = floor(random(300, 500));
           
-          console.log(delaytime[i1], feedback[i2])
+          console.log(i1, i2)
 
           modLFO.connect(modVolume);
           modVolume.connect(source.oscillator.detune);
@@ -142,8 +142,6 @@ function getPlayer(uid) {
     return players[uid]
 
 }
-
-var oscs = [];
 
 function playnotes(uid, mx, my, cw, ch) {
     var player = getPlayer(uid);
