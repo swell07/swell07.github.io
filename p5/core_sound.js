@@ -1,7 +1,7 @@
 var waveform = ['sine', 'sawtooth', 'square', 'triangle'];
 var filterType = ['lowpass', 'bandpass', 'highpass'];
-var delaytime = [0.2, 0.4, 0.8];
-var feedback = [0.2, 0.3, 0.1];
+var delaytime = [0.3, 0.5, 0.8];
+var feedback = [0.2, 0.4, 0.5];
 
 function setup() {
     noCanvas();
