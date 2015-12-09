@@ -105,7 +105,7 @@ function getPlayer(uid) {
           delay.amp(0.6, 0.2);
           modVolume.gain.value = floor(random(300, 500));
           
-          console.log(i1, i2)
+          console.log(i1, i2, j)
 
           modLFO.connect(modVolume);
           modVolume.connect(source.oscillator.detune);
