@@ -169,7 +169,7 @@ function stopnotes(uid, mx, my, cw, ch) {
     } else if (player.mode == 2) {
         player.resources.noise.amp(0, 1);
     } else if (player.mode == 3 || player.mode == 4) {
-        player.resources.oscVolume.amp(0);
+        player.resources.oscVolume.amp(0,1);
     }
 }
 
