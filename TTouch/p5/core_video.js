@@ -80,7 +80,7 @@ function ParticleSystem(location, r, colors) {
               var vx = 0;
               var vy = random(0, 1);
               var ax = random(-0.02, 0.04);
-              var ay = random(0.15);
+              var ay = random(0.1);
               var colorchange = (random(1) < 0.5) ? colorchange = lerpColor(colors[0], colors[1], random(1)) : lerpColor(colors[2], colors[3], random(1));
               me.particles.push(new Particle(me.origin, me.r, colorchange, vx, vy, ax, ay, false, me));
 
