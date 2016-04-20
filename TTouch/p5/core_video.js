@@ -75,7 +75,8 @@ function ParticleSystem(location, r, colors) {
 
     me.addParticle = function() {
         if (!me.isOver) {
-            if ((me.mseX == me.prevMseX) && (me.mseY == me.prevMseY)) {
+            //if ((me.mseX == me.prevMseX) && (me.mseY == me.prevMseY)) {
+            if(abs(me.mseX - me.prevMseX) < 5 && abs(me.mseY - me.prevMseY) < 5){
                 var speed = random(0.01, 1);
                 var angle = random(360);
                 var distance = 0.05 * me.mseX / width;
