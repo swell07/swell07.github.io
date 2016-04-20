@@ -47,7 +47,7 @@ function Particle(l, _r, _c, vx, vy, ax, ay, isFRun, ps) {
         strokeWeight(0);
         fill(me.c.levels[0], me.c.levels[1], me.c.levels[2], me.lifespan);
         //ellipse(me.location.x, me.location.y, me.r, me.r);
-        line(me.location.x, me.location.y, me.pX, me.pY);
+        line(me.pX, me.pY, me.location.x, me.location.y);
     }
 
     me.isDead = function() {
