@@ -30,7 +30,9 @@ var MAX_OSC_SIZE = 4;
 function getPlayer(uid) {
     if (!players[uid]) {
         //decide mode
-        var mode = ceil(random(4));
+        //var mode = ceil(random(4));
+        var mode = getIndexFromId(uid,4)+1
+
         // mode is decided
         //var mode = 3;
         console.log(mode)
