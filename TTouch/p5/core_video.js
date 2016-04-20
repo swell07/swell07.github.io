@@ -14,8 +14,8 @@ function Particle(l, _r, _c, vx, vy, ax, ay, isFRun, ps) {
     me.c = _c;
     me.X = ps.mseX;
     me.Y = ps.mseY;
-    me.pX = ps.prevMseX;
-    me.pY = ps.prevMseY;
+    // me.pX = ps.prevMseX;
+    // me.pY = ps.prevMseY;
     //init end
 
     me.run = function() {
@@ -46,8 +46,8 @@ function Particle(l, _r, _c, vx, vy, ax, ay, isFRun, ps) {
         stroke(0, me.lifespan);
         strokeWeight(0);
         fill(me.c.levels[0], me.c.levels[1], me.c.levels[2], me.lifespan);
-        //ellipse(me.location.x, me.location.y, me.r, me.r);
-        line(me.pX, me.pY, me.location.x, me.location.y);
+        ellipse(me.location.x, me.location.y, me.r, me.r);
+        //line(me.pX, me.pY, me.location.x, me.location.y);
     }
 
     me.isDead = function() {
