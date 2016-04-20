@@ -13,7 +13,7 @@ var ajax = tool.ajax;
 var extend = tool.extend;
 
 // 当前版本
-var VERSION = '2.3.1';
+var VERSION = '2.3.5';
 
 // 配置项
 var config = {
@@ -446,6 +446,7 @@ var newRealtimeObject = function newRealtimeObject() {
           // 默认的数据，可以放 Conversation 名字等
           attr: options.attr || {},
           transient: options.transient || false,
+          unique: options.unique || false,
           serialId: engine.getSerialId(cache)
         };
 
@@ -502,6 +503,11 @@ var newRealtimeObject = function newRealtimeObject() {
         }
       };
       cache.ec.on('conv-results', fun);
+      if (!options.where) {
+        options.where = {};
+        // 默认查找的当前用户所在的 conv
+        options.where.m = cache.options.peerId;
+      }
       engine.convQuery(cache, options);
       return this;
     },
@@ -568,7 +574,7 @@ var realtime = function realtime(options, callback) {
     };
 
     var realtimeObj = newRealtimeObject();
-    realtimeObj.clientId = options.clientId;
+    realtimeObj.clientId = options.peerId;
     realtimeObj.cache.options = options;
     realtimeObj.cache.ec = tool.eventCenter();
     realtimeObj.cache.authFun = options.auth;
@@ -805,6 +811,7 @@ engine.startConv = function (cache, options) {
       attr: options.attr || {}
     },
     i: options.serialId,
+    unique: options.unique || false,
     // 是否是开放聊天室，无人数限制
     transient: options.transient || false
   };
@@ -900,15 +907,30 @@ engine.send = function (cache, options) {
 
 engine.convQuery = function (cache, options) {
   options = options || {};
+  var where = options.where || {};
+
+  // 同时查找含有数组中 id 的用户所在的 conversation
+  if (where.m && typeof where.m !== 'string') {
+    where.m = {
+      $all: where.m
+    };
+  }
+
+  // 批量查找 room 信息
+  if (where.roomIds || where.convIds) {
+    where.objectId = {
+      $in: where.roomIds || where.convIds
+    };
+    // 避免对查询项产生干扰
+    delete where.roomIds;
+    delete where.convIds;
+  }
+
   engine.wsSend(cache, {
     cmd: 'conv',
     op: 'query',
     // where 可选，对象，默认为包含自己的查询 {"m": peerId}
-    where: options.where || {
-      m: cache.options.peerId
-      // conversation 的 id
-      // objectId: options.cid
-    },
+    where: where,
     // sort 可选，字符串，默认为 -lm，最近对话反序
     sort: options.sort || '-lm',
     // limit 可选，数字，默认10
@@ -1026,6 +1048,9 @@ engine.getMediaMsg = function (cache, msg) {
       break;
     case -5:
       obj.type = 'location';
+      if (msg._lcloc) {
+        obj.location = msg._lcloc;
+      }
       break;
     case -6:
       obj.type = 'file';

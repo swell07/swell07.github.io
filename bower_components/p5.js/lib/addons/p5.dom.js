@@ -1,4 +1,4 @@
-/*! p5.dom.js v0.2.6 November 10, 2015 */
+/*! p5.dom.js v0.2.9 March 3, 2016 */
 /**
  * <p>The web is much more than just canvas and p5.dom makes it easy to interact
  * with other HTML5 objects, including text, hyperlink, image, input, video,
@@ -54,7 +54,7 @@
    * function setup() {
    *   createCanvas(100,100);
    *   //translates canvas 50px down
-   *   select('canvas').translate(0,50);
+   *   select('canvas').position(100, 100);
    * }
    * </code></div>
    * <div ><code class='norender'>
@@ -566,7 +566,7 @@
    * Creates a radio button &lt;input&gt;&lt;/input&gt; element in the DOM.
    *
    * @method createRadio
-   * @param  {String} [divId] the id and name of the created div and input field respectively 
+   * @param  {String} [divId] the id and name of the created div and input field respectively
    * @return {Object/p5.Element} pointer to p5.Element holding created node
    */
   p5.prototype.createRadio = function() {
@@ -646,7 +646,7 @@
     };
     return self
   };
-  
+
   /**
    * Creates an &lt;input&gt;&lt;/input&gt; element in the DOM for text input.
    * Use .size() to set the display length of the box.
@@ -729,7 +729,7 @@
           }
         }
       }
-      
+
       // Now let's handle when a file was selected
       elt.addEventListener('change', handleFileSelect, false);
       return addElement(elt, this);
@@ -743,6 +743,9 @@
 
   function createMedia(pInst, type, src, callback) {
     var elt = document.createElement(type);
+
+    // allow src to be empty
+    var src = src || '';
     if (typeof src === 'string') {
       src = [src];
     }
@@ -806,7 +809,7 @@
    * paths to different formats of the same audio. This is useful for ensuring
    * that your audio can play across different browsers, as each supports
    * different formats. See <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Supported_media_formats">this
-   * page for further information about supported formats.
+   * page for further information about supported formats</a>.
    *
    * @method createAudio
    * @param  {String|Array} src  path to an audio file, or array of paths for
@@ -846,7 +849,7 @@
    * @method createCapture
    * @param  {String|Constant|Object}   type type of capture, either VIDEO or
    *                                    AUDIO if none specified, default both,
-   *                                    or a Constraints boject
+   *                                    or a Constraints object
    * @param  {Function}                 callback function to be called once
    *                                    stream has loaded
    * @return {Object/p5.Element} capture video p5.Element
@@ -1003,10 +1006,11 @@
   /**
    *
    * Attaches the element  as a child to the parent specified.
-   * Accepts either a string ID, DOM node, or p5.Element
+   * Accepts either a string ID, DOM node, or p5.Element.
+   * If no argument is specified, an array of children DOM nodes is returned.
    *
    * @method child
-   * @param  {String|Object/p5.Element} child the ID, DOM node, or p5.Element
+   * @param  {String|Object|p5.Element} [child] the ID, DOM node, or p5.Element
    *                         to add to the current element
    * @return {p5.Element}
    * @example
@@ -1028,6 +1032,9 @@
    * </code></div>
    */
   p5.Element.prototype.child = function(c) {
+    if (c === null){
+      return this.elt.childNodes
+    }
     if (typeof c === 'string') {
       if (c[0] === '#') {
         c = c.substring(1);
@@ -1153,91 +1160,51 @@
     }
   };
 
-  /**
-   * Translates an element with css transforms in either 2d (if 2 arguments given)
-   * or 3d (if 3 arguments given) space.
-   * @method  translate
-   * @param  {Number} x x-position in px
-   * @param  {Number} y y-position in px
-   * @param  {Number} [z] z-position in px
-   * @param  {Number} [perspective] sets the perspective of the parent element in px,
-   * default value set to 1000px
-   * @return {Object/p5.Element}
-   * @example
-   * <div ><code class='norender'>
-   * function setup() {
-   *   var cnv = createCanvas(100,100);
-   *   //translates canvas 50px down
-   *   cnv.translate(0,50);
-   * }
-   * </code></div>
-   */
-  p5.Element.prototype.translate = function(){
+  /* Helper method called by p5.Element.style() */
+  p5.Element.prototype._translate = function(){
     this.elt.style.position = 'absolute';
-    if (arguments.length === 2){
-      var style = this.elt.style.transform.replace(/translate3d\(.*\)/g, '');
-      style = style.replace(/translate[X-Z]?\(.*\)/g, '');
-      this.elt.style.transform = 'translate('+arguments[0]+'px, '+arguments[1]+'px)';
-      this.elt.style.transform += style;
-    }else if (arguments.length === 3){
-      var style = this.elt.style.transform.replace(/translate3d\(.*\)/g, '');
-      style = style.replace(/translate[X-Z]?\(.*\)/g, '');
-      this.elt.style.transform = 'translate3d('+arguments[0]+'px,'+arguments[1]+'px,'+arguments[2]+'px)';
-      this.elt.style.transform += style;
-      this.elt.parentElement.style.perspective = '1000px';
-    }else if (arguments.length === 4){
-      var style = this.elt.style.transform.replace(/translate3d\(.*\)/g, '');
-      style = style.replace(/translate[X-Z]?\(.*\)/g, '');
-      this.elt.style.transform = 'translate3d('+arguments[0]+'px,'+arguments[1]+'px,'+arguments[2]+'px)';
-      this.elt.style.transform += style;
-      this.elt.parentElement.style.perspective = arguments[3]+'px';
+    // save out initial non-translate transform styling
+    var transform = '';
+    if (this.elt.style.transform) {
+      transform = this.elt.style.transform.replace(/translate3d\(.*\)/g, '');
+      transform = transform.replace(/translate[X-Z]?\(.*\)/g, '');
     }
-      return this;
+    if (arguments.length === 2) {
+      this.elt.style.transform = 'translate('+arguments[0]+'px, '+arguments[1]+'px)';
+    } else if (arguments.length > 2) {
+      this.elt.style.transform = 'translate3d('+arguments[0]+'px,'+arguments[1]+'px,'+arguments[2]+'px)';
+      if (arguments.length === 3) {
+        this.elt.parentElement.style.perspective = '1000px';
+      } else {
+        this.elt.parentElement.style.perspective = arguments[3]+'px';
+      }
+    }
+    // add any extra transform styling back on end
+    this.elt.style.transform += transform;
+    return this;
   };
 
-  /**
-   * Rotates an element with css transforms in either 2d (if 2 arguments given)
-   * or 3d (if 3 arguments given) space.
-   * @method  rotate
-   * @param  {Number} x amount of degrees to rotate the element along the x-axis in deg
-   * @param  {Number} [y] amount of degrees to rotate the element along the y-axis in deg
-   * @param  {Number} [z] amount of degrees to rotate the element along the z-axis in deg
-   * @return {Object/p5.Element}
-   * @example
-   * <div><code>
-   * var x = 0,
-   *     y = 0,
-   *     z = 0;
-   *
-   * function draw(){
-   *   x+=.5 % 360;
-   *   y+=.5 % 360;
-   *   z+=.5 % 360;
-   *   //rotates p5.js logo .5 degrees on every axis each frame.
-   *   select('canvas').rotate(x,y,z);
-   * }
-   * </code></div>
-   */
-  p5.Element.prototype.rotate = function(){
+  /* Helper method called by p5.Element.style() */
+  p5.Element.prototype._rotate = function(){
+    // save out initial non-rotate transform styling
+    var transform = '';
+    if (this.elt.style.transform) {
+      var transform = this.elt.style.transform.replace(/rotate3d\(.*\)/g, '');
+      transform = transform.replace(/rotate[X-Z]?\(.*\)/g, '');
+    }
+
     if (arguments.length === 1){
-      var style = this.elt.style.transform.replace(/rotate3d\(.*\)/g, '');
-      style = style.replace(/rotate[X-Z]?\(.*\)/g, '');
       this.elt.style.transform = 'rotate('+arguments[0]+'deg)';
-      this.elt.style.transform += style;
     }else if (arguments.length === 2){
-      var style = this.elt.style.transform.replace(/rotate3d\(.*\)/g, '');
-      style = style.replace(/rotate[X-Z]?\(.*\)/g, '');
       this.elt.style.transform = 'rotate('+arguments[0]+'deg, '+arguments[1]+'deg)';
-      this.elt.style.transform += style;
     }else if (arguments.length === 3){
-      var style = this.elt.style.transform.replace(/rotate3d\(.*\)/g, '');
-      style = style.replace(/rotate[X-Z]?\(.*\)/g, '');
       this.elt.style.transform = 'rotateX('+arguments[0]+'deg)';
       this.elt.style.transform += 'rotateY('+arguments[1]+'deg)';
       this.elt.style.transform += 'rotateZ('+arguments[2]+'deg)';
-      this.elt.style.transform += style;
     }
-      return this;
+    // add remaining transform back on
+    this.elt.style.transform += transform;
+    return this;
   };
 
   /**
@@ -1262,15 +1229,37 @@
    * var myDiv = createDiv("I like pandas.");
    * myDiv.style("font-size", "18px");
    * myDiv.style("color", "#ff0000");
+   * </code></div>
+   * <div><code class="norender">
    * var col = color(25,23,200,50);
-   * createButton.style("background-color", col);
+   * var button = createButton("button");
+   * button.style("background-color", col);
+   * button.position(10, 10);
+   * </code></div>
+   * <div><code class="norender">
+   * var myDiv = createDiv("I like lizards.");
+   * myDiv.style("position", 20, 20);
+   * myDiv.style("rotate", 45);
+   * </code></div>
+   * <div><code class="norender">
+   * var myDiv;
+   * function setup() {
+   *   background(200);
+   *   myDiv = createDiv("I like gray.");
+   *   myDiv.position(20, 20);
+   * }
+   *
+   * function draw() {
+   *   myDiv.style("font-size", mouseX+"px");
+   * }
    * </code></div>
    */
   p5.Element.prototype.style = function(prop, val) {
     var self = this;
 
-    if (val instanceof p5.Color)
+    if (val instanceof p5.Color) {
       val = 'rgba(' + val.levels[0] + ',' + val.levels[1] + ',' + val.levels[2] + ',' + val.levels[3]/255 + ')'
+    }
 
     if (typeof val === 'undefined') {
       if (prop.indexOf(':') === -1) {
@@ -1287,54 +1276,15 @@
         }
       }
     } else {
-      if (prop === 'rotate'){
-        if (arguments.length === 2) {
-          var style = this.elt.style.transform.replace(/rotate3d\(.*\)/g, '');
-          style = style.replace(/rotate[X-Z]?\(.*\)/g, '');
-          this.elt.style.transform = 'rotate(' + arguments[0] + 'deg)';
-          this.elt.style.transform += style;
-        } else if (arguments.length === 3) {
-          var style = this.elt.style.transform.replace(/rotate3d\(.*\)/g, '');
-          style = style.replace(/rotate[X-Z]?\(.*\)/g, '');
-          this.elt.style.transform = 'rotate(' + arguments[0] + 'deg, ' + arguments[1] + 'deg)';
-          this.elt.style.transform += style;
-        } else if (arguments.length === 4) {
-          var style = this.elt.style.transform.replace(/rotate3d\(.*\)/g, '');
-          style = style.replace(/rotate[X-Z]?\(.*\)/g, '');
-          this.elt.style.transform = 'rotateX(' + arguments[0] + 'deg)';
-          this.elt.style.transform += 'rotateY(' + arguments[1] + 'deg)';
-          this.elt.style.transform += 'rotateZ(' + arguments[2] + 'deg)';
-          this.elt.style.transform += style;
-        }
-      } else if (prop === 'translate') {
-        if (arguments.length === 3) {
-          var style = this.elt.style.transform.replace(/translate3d\(.*\)/g, '');
-          style = style.replace(/translate[X-Z]?\(.*\)/g, '');
-          this.elt.style.transform = 'translate(' + arguments[0] + 'px, ' + arguments[1] + 'px)';
-          this.elt.style.transform += style;
-        } else if (arguments.length === 4) {
-          var style = this.elt.style.transform.replace(/translate3d\(.*\)/g, '');
-          style = style.replace(/translate[X-Z]?\(.*\)/g, '');
-          this.elt.style.transform = 'translate3d(' + arguments[0] + 'px,' + arguments[1] + 'px,' + arguments[2] + 'px)';
-          this.elt.style.transform += style;
-          this.elt.parentElement.style.perspective = '1000px';
-        } else if (arguments.length === 5) {
-          var style = this.elt.style.transform.replace(/translate3d\(.*\)/g, '');
-          style = style.replace(/translate[X-Z]?\(.*\)/g, '');
-          this.elt.style.transform = 'translate3d(' + arguments[0] + 'px,' + arguments[1] + 'px,' + arguments[2] + 'px)';
-          this.elt.style.transform += style;
-          this.elt.parentElement.style.perspective = arguments[3] + 'px';
-        }
-      } else if (prop === 'position') {
-        this.elt.style.left = arguments[1] + 'px';
-        this.elt.style.top = arguments[2] + 'px';
-        this.x = arguments[1];
-        this.y = arguments[2];
+      if (prop === 'rotate' || prop === 'translate' || prop === 'position'){
+        var trans = Array.prototype.shift.apply(arguments);
+        var f = this[trans] || this['_'+trans];
+        f.apply(this, arguments);
       } else {
         this.elt.style[prop] = val;
         if (prop === 'width' || prop === 'height' || prop === 'left' || prop === 'top') {
           var numVal = val.replace(/\D+/g, '');
-          this[prop] = parseInt(numVal, 10);
+          this[prop] = parseInt(numVal, 10); // pend: is this necessary?
         }
       }
     }
@@ -1356,7 +1306,7 @@
    * @example
    * <div class="norender"><code>
    * var myDiv = createDiv("I like pandas.");
-   *myDiv.attribute("align", "center");
+   * myDiv.attribute("align", "center");
    * </code></div>
    */
   p5.Element.prototype.attribute = function(attr, value) {
@@ -1376,6 +1326,29 @@
    * @method value
    * @param  {String|Number}     [value]
    * @return {String|Object/p5.Element} value of element if no value is specified or p5.Element
+   * @example
+   * <div class='norender'><code>
+   * // gets the value
+   * var inp;
+   * function setup() {
+   *   inp = createInput('');
+   * }
+   *
+   * function mousePressed() {
+   *   print(inp.value());
+   * }
+   * </code></div>
+   * <div class='norender'><code>
+   * // sets the value
+   * var inp;
+   * function setup() {
+   *   inp = createInput('myValue');
+   * }
+   *
+   * function mousePressed() {
+   *   inp.value("myValue");
+   * }
+   * </code></div>
    */
   p5.Element.prototype.value = function() {
     if (arguments.length > 0) {
@@ -1395,6 +1368,12 @@
    *
    * @method show
    * @return {Object/p5.Element}
+   * @example
+   * <div class='norender'><code>
+   * var div = createDiv('div');
+   * div.attribute("display", "none");
+   * div.show(); // turns display to block
+   * </code></div>
    */
   p5.Element.prototype.show = function() {
     this.elt.style.display = 'block';
@@ -1406,6 +1385,11 @@
    *
    * @method hide
    * @return {Object/p5.Element}
+   * @example
+   * <div class='norender'><code>
+   * var div = createDiv('this is a div');
+   * div.hide();
+   * </code></div>
    */
   p5.Element.prototype.hide = function() {
     this.elt.style.display = 'none';
@@ -1422,6 +1406,11 @@
    * @param  {Number} [w] width of the element
    * @param  {Number} [h] height of the element
    * @return {Object/p5.Element}
+   * @example
+   * <div class='norender'><code>
+   * var div = createDiv('this is a div');
+   * div.size(100, 100);
+   * </code></div>
    */
   p5.Element.prototype.size = function(w, h) {
     if (arguments.length === 0){
@@ -1514,12 +1503,43 @@
   p5.MediaElement = function(elt, pInst) {
     p5.Element.call(this, elt, pInst);
 
+    var self = this;
+    this.elt.crossOrigin = 'anonymous';
 
     this._prevTime = 0;
     this._cueIDCounter = 0;
     this._cues = [];
     this._pixelDensity = 1;
 
+    /**
+     *  Path to the media element source.
+     *
+     *  @property src
+     *  @return {String} src
+     */
+    Object.defineProperty(self, 'src', {
+      get: function() {
+        var firstChildSrc = self.elt.children[0].src;
+        var srcVal = self.elt.src === window.location.href ? '' : self.elt.src;
+        var ret = firstChildSrc === window.location.href ? srcVal : firstChildSrc;
+        return ret;
+      },
+      set: function(newValue) {
+        for (var i = 0; i < self.elt.children.length; i++) {
+          self.elt.removeChild(self.elt.children[i]);
+        }
+        var source = document.createElement('source');
+        source.src = newValue;
+        elt.appendChild(source);
+        self.elt.src = newValue;
+      },
+    });
+
+    // private _onended callback, set by the method: onended(callback)
+    self._onended = function() {};
+    self.elt.onended = function() {
+      self._onended(self);
+    }
   };
   p5.MediaElement.prototype = Object.create(p5.Element.prototype);
 
@@ -1623,6 +1643,25 @@
   };
 
   /**
+   * If no arguments are given, returns the current playback speed of the
+   * element. The speed parameter sets the speed where 2.0 will play the
+   * element twice as fast, 0.5 will play at half the speed, and -1 will play
+   * the element in normal speed in reverse.(Note that not all browsers support
+   * backward playback and even if they do, playback might not be smooth.)
+   *
+   * @method speed
+   * @param {Number} [speed]  speed multiplier for element playback
+   * @return {Number|Object/p5.MediaElement} current playback speed or p5.MediaElement
+   */
+  p5.MediaElement.prototype.speed = function(val) {
+    if (typeof val === 'undefined') {
+      return this.elt.playbackRate;
+    } else {
+      this.elt.playbackRate = val;
+    }
+  };
+
+  /**
    * If no arguments are given, returns the current time of the element.
    * If an argument is given the current time of the element is set to it.
    *
@@ -1650,14 +1689,14 @@
   };
   p5.MediaElement.prototype.pixels = [];
   p5.MediaElement.prototype.loadPixels = function() {
+    if (!this.canvas) {
+      this.canvas = document.createElement('canvas');
+      this.drawingContext = this.canvas.getContext('2d');
+    }
     if (this.loadedmetadata) { // wait for metadata for w/h
-      if (!this.canvas) {
-        this.canvas = document.createElement('canvas');
-        this.drawingContext = this.canvas.getContext('2d');
-      }
-      if (this.canvas.width !== this.elt.width) {
-        this.canvas.width = this.elt.width;
-        this.canvas.height = this.elt.height;
+      if (this.canvas.width !== this.elt.videoWidth) {
+        this.canvas.width = this.elt.videoWidth;
+        this.canvas.height = this.elt.videoHeight;
         this.width = this.canvas.width;
         this.height = this.canvas.height;
       }
@@ -1682,6 +1721,37 @@
       p5.Renderer2D.prototype.set.call(this, x, y, imgOrCol);
     }
   };
+  /**
+   *  Schedule an event to be called when the audio or video
+   *  element reaches the end. If the element is looping,
+   *  this will not be called. The element is passed in
+   *  as the argument to the onended callback.
+   *
+   *  @method  onended
+   *  @param  {Function} callback function to call when the
+   *                              soundfile has ended. The
+   *                              media element will be passed
+   *                              in as the argument to the
+   *                              callback.
+   *  @return {Object/p5.MediaElement}
+   *  @example
+   *  <div><code>
+   *  function setup() {
+   *    audioEl = createAudio('assets/beat.mp3');
+   *    audioEl.showControls(true);
+   *    audioEl.onended(sayDone);
+   *  }
+   *
+   *  function sayDone(elt) {
+   *    alert('done playing ' + elt.src );
+   *  }
+   *  </code></div>
+   */
+  p5.MediaElement.prototype.onended = function(callback) {
+    this._onended = callback;
+    return this;
+  };
+
 
   /*** CONNECT TO WEB AUDIO API / p5.sound.js ***/
 
@@ -1774,7 +1844,6 @@
   p5.MediaElement.prototype.hideControls = function() {
     this.elt.controls = false;
   };
-
 
   /*** SCHEDULE EVENTS ***/
 
@@ -1954,7 +2023,11 @@
      */
     this.size = file.size;
 
-    // Data not loaded yet
+    /**
+     * URL string containing image data.
+     *
+     * @property data
+     */
     this.data = undefined;
   };
 

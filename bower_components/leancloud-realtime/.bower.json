@@ -1,6 +1,6 @@
 {
   "name": "leancloud-realtime",
-  "version": "2.3.1",
+  "version": "2.3.5",
   "homepage": "http://github.com/leancloud/js-realtime-sdk/",
   "authors": [
     "WangXiao <xwang@leancloud.rocks>"
@@ -28,14 +28,13 @@
   "devDependencies": {
     "mocha": "~2.2.5"
   },
-  "_release": "2.3.1",
+  "_release": "2.3.5",
   "_resolution": {
     "type": "version",
-    "tag": "2.3.1",
-    "commit": "caaf115924e07037348ab32a30b5b8453c8f59ce"
+    "tag": "2.3.5",
+    "commit": "0fa4bc42e975de908fdfbd8f85470ed69ec1b30a"
   },
-  "_source": "git://github.com/leancloud/js-realtime-sdk.git",
+  "_source": "https://github.com/leancloud/js-realtime-sdk.git",
   "_target": "~2.3.1",
-  "_originalSource": "leancloud-realtime",
-  "_direct": true
+  "_originalSource": "leancloud-realtime"
 }
