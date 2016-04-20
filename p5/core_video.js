@@ -6,7 +6,6 @@ function Particle(l, _r, _c, vx, vy, ax, ay, isFRun, ps) {
     me.acceleration = createVector(ax, ay); //new PVector(0, random(-0.05, 0.05));
     me.velocity = createVector(vx, vy);
     me.location = l.copy(); //get is deprecated.
-    me.plocation = createVector(px, py);
     me.r = _r * random(3);
     me.isFlowerRun = isFRun;
 
