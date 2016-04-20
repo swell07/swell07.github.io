@@ -19,7 +19,7 @@ var firstFlag = true;
     rt = AV.realtime({
         appId: appId,
         clientId: clientId,
-        secure: false,
+        //secure: false,
         region: 'us'
     });
 
