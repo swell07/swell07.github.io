@@ -8,7 +8,7 @@ function getIndexFromId(userId, N) { //return one int from 0,1,...,N-1
 
 function setup() {
     createCanvas(displayWidth, displayHeight);
-    frameRate(30);
+    frameRate(60);
     // createCanvas(screen.width, screen.height)
     colors = [
         [
