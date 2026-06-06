@@ -330,6 +330,24 @@
     .tl-item:nth-child(even) .tl-content { grid-column: 3; text-align: left; padding-left: 2rem; order: 3; }
     .tl-item:nth-child(even) .tl-empty { grid-column: 1; order: 1; }
 
+    .tl-sub {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 0.5rem;
+      border-left: 2px solid rgba(255, 196, 0, 0.4);
+      padding-left: 1rem;
+    }
+
+    .tl-sub-item {
+      padding: 0.75rem 0;
+      border-bottom: 1px dashed rgba(255, 180, 0, 0.25);
+    }
+
+    .tl-sub-item:last-child {
+      border-bottom: none;
+    }
+
     .tl-dot {
       grid-column: 2;
       display: flex;
@@ -837,66 +855,103 @@
     </div>
   </section>
 
-  <!-- OUR STORY -->
+<!-- OUR STORY -->
+<section id="our-story">
+  <div class="section-inner">
+    <p class="section-eyebrow">How it began</p>
+    <h2 class="section-title">Our <em>Story</em></h2>
+    <p class="section-lead">Every great love story has a beginning. Here's ours.</p>
+    <div style="width: 100%; border-radius: 12px; overflow: hidden;">
+      <img 
+        src="images/love_story.jpg" 
+        alt="Our Story — Kelvin and Danyi" 
+        style="width: 100%; height: auto; display: block;"
+      />
+    </div>
+  </div>
+</section>
+
+<!-- 
   <section id="our-story">
     <div class="section-inner">
       <p class="section-eyebrow">How it began</p>
       <h2 class="section-title">Our <em>Story</em></h2>
       <p class="section-lead">Every great love story has a beginning. Here's ours.</p>
 
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-content">
-            <p class="tl-date">Once upon a time</p>
-            <h3 class="tl-title">The First Meeting</h3>
-            <p class="tl-text">Share how you first met — a chance encounter, a mutual friend, or something unexpected. This is your moment to tell it.</p>
-          </div>
-          <div class="tl-dot"><div class="tl-dot-inner">✨</div></div>
-          <div class="tl-empty"></div>
-        </div>
+<div class="timeline">
 
-        <div class="tl-item">
-          <div class="tl-empty"></div>
-          <div class="tl-dot"><div class="tl-dot-inner">💛</div></div>
-          <div class="tl-content">
-            <p class="tl-date">The beginning</p>
-            <h3 class="tl-title">We Became "Us"</h3>
-            <p class="tl-text">The moment you knew this was something special. Add your own chapter of the story here.</p>
-          </div>
+  <div class="tl-item">
+    <div class="tl-content">
+      <p class="tl-date">Once upon a time</p>
+      <div class="tl-sub">
+        <div class="tl-sub-item">
+          <h3 class="tl-title">The First Chat</h3>
+          <p class="tl-text">It all started with a Super Like.</p>
         </div>
-
-        <div class="tl-item">
-          <div class="tl-content">
-            <p class="tl-date">Adventures together</p>
-            <h3 class="tl-title">Exploring the World</h3>
-            <p class="tl-text">All the places you've been, things you've tried, and memories you've built together along the way.</p>
-          </div>
-          <div class="tl-dot"><div class="tl-dot-inner">✈️</div></div>
-          <div class="tl-empty"></div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-empty"></div>
-          <div class="tl-dot"><div class="tl-dot-inner">💍</div></div>
-          <div class="tl-content">
-            <p class="tl-date">The proposal</p>
-            <h3 class="tl-title">She Said Yes!</h3>
-            <p class="tl-text">Tell the story of the proposal — the when, where, how, and the feeling in that moment.</p>
-          </div>
-        </div>
-
-        <div class="tl-item">
-          <div class="tl-content">
-            <p class="tl-date">25 September 2026</p>
-            <h3 class="tl-title">Our Wedding Day</h3>
-            <p class="tl-text">And now, surrounded by everyone we love, we begin the next beautiful chapter together.</p>
-          </div>
-          <div class="tl-dot"><div class="tl-dot-inner">🌟</div></div>
-          <div class="tl-empty"></div>
+        <div class="tl-sub-item">
+          <h3 class="tl-title">The First Date</h3>
+          <p class="tl-text">Danyi treated Kelvin at one of her fav gelato shop in Leiden. Then McDonalds became the perfect place for our story to begin.</p>
         </div>
       </div>
     </div>
+    <div class="tl-dot"><div class="tl-dot-inner">🩵</div></div>
+    <div class="tl-empty"></div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-empty"></div>
+    <div class="tl-dot"><div class="tl-dot-inner">🏠</div></div>
+    <div class="tl-content">
+      <p class="tl-date">We became US</p>
+      <div class="tl-sub">
+        <div class="tl-sub-item">
+          <h3 class="tl-title">Moving in Together</h3>
+          <p class="tl-text">After navigating a long-distance relationship through COVID, we finally closed the distance and moved in together.</p>
+        </div>
+        <div class="tl-sub-item">
+          <h3 class="tl-title">Exploring the World</h3>
+          <p class="tl-text">From the heights of Kilimanjaro 🦒 to the wild landscapes of Patagonia ⛰️, from tropical islands 🏝️ to the icy beauty of Arctic 🐻‍❄️, we have collected unforgettable memories across the world.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-content">
+      <p class="tl-date">Welcome Teemo</p>
+      <h3 class="tl-title">Purrrrrr 🐈</h3>
+      <p class="tl-text">In 2023, we drove to Hanover to pick up the newest member of our family: Teemo. Our home instantly became a little furrier and a lot happier.</p>
+    </div>
+    <div class="tl-dot"><div class="tl-dot-inner">🐈</div></div>
+    <div class="tl-empty"></div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-empty"></div>
+    <div class="tl-dot"><div class="tl-dot-inner">💍</div></div>
+    <div class="tl-content">
+      <p class="tl-date">The Proposal</p>
+      <h3 class="tl-title">He said YES!</h3>
+      <p class="tl-text">03 Feb 2026, 21:51, Sapporo metro station, Danyi proposed to Kelvin. And of course Kelvin proposed back!</p>
+    </div>
+  </div>
+
+  <div class="tl-item">
+    <div class="tl-content">
+      <p class="tl-date">25 September 2026</p>
+      <h3 class="tl-title">Our Wedding Day</h3>
+      <p class="tl-text">And now, surrounded by everyone we love, we begin the next beautiful chapter together.</p>
+    </div>
+    <div class="tl-dot"><div class="tl-dot-inner">🌟</div></div>
+    <div class="tl-empty"></div>
+  </div>
+
+</div>
+      </div>
+    </div>
   </section>
+
+-->
 
   <!-- RSVP -->
   <section id="rsvp">
