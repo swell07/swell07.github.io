@@ -103,7 +103,7 @@
       text-align: center;
       padding: 100px 2rem 4rem;
       position: relative;
-      background: linear-gradient(170deg, rgba(255,249,230,0.55) 0%, rgba(255,195,0,0.45) 100%), url('../images/headline.png') center/cover no-repeat;
+      background: linear-gradient(170deg, rgba(255,249,230,0.15) 0%, rgba(255,195,0,0.05) 100%), url('images/headline.png') center/cover no-repeat;
       overflow: hidden;
     }
 
@@ -134,7 +134,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--deep);
+      color: var(--amber);
       margin-bottom: 1.5rem;
       position: relative;
     }
@@ -150,7 +150,7 @@
 
     .hero-names .amp {
       font-style: italic;
-      color: var(--deep);
+      color: var(--amber);
       font-size: 0.7em;
     }
 
@@ -167,7 +167,7 @@
     .hero-divider {
       width: 60px;
       height: 1px;
-      background: var(--orange);
+      background: var(--amber);
       margin: 2rem auto;
       position: relative;
     }
@@ -191,7 +191,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--deep);
+      color: var(--amber);
       text-decoration: none;
       display: flex;
       flex-direction: column;
@@ -559,10 +559,10 @@
 
     .gift-title {
       font-family: var(--serif);
-      font-size: 1.1rem;
+      font-size: 1.8rem;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 0.4rem;
+      margin-bottom: 1rem;
     }
 
     .gift-desc {
@@ -816,11 +816,13 @@
           <p class="ov-label">Date</p>
           <p class="ov-value">Friday<br>25 September 2026</p>
         </div>
+       <!--
         <div class="ov-card">
           <span class="ov-icon">⏰</span>
           <p class="ov-label">Ceremony Starts</p>
           <p class="ov-value">To be announced</p>
         </div>
+        -->
         <div class="ov-card">
           <span class="ov-icon">📍</span>
           <p class="ov-label">Venue</p>
@@ -902,10 +904,10 @@
       <p class="section-eyebrow">Join Us</p>
       <h2 class="section-title">Will You <em>Celebrate</em> With Us?</h2>
       <div class="rsvp-box">
-        <div class="rsvp-deadline">⏰ Please respond by [date TBC]</div>
+        <div class="rsvp-deadline">⏰ Please respond by 30 June 2026</div>
         <p>We'd love to know you'll be there. Let us know if you're joining us and any preferences you have so we can make the day perfect for everyone.</p>
-        <a href="#" class="btn-primary">✨ RSVP Now</a><br>
-        <a href="#" class="btn-secondary">📧 Contact us instead</a>
+        <a href="https://forms.gle/F1ZnjftZ2RwanPNA7" class="btn-primary">✨ RSVP Now</a><br>
+       <!-- <a href="#" class="btn-secondary">📧 Contact us instead</a> -->
       </div>
     </div>
   </section>
@@ -917,9 +919,20 @@
       <h2 class="section-title">The <em>Agenda</em></h2>
       <p class="section-lead">We've planned a beautiful day full of love, laughter, and unforgettable moments.</p>
 
+      <div class="ag-item">
+          <div class="ag-time">2:30pm</div>
+          <div class="ag-line"></div>
+          <div class="ag-body">
+            <div class="ag-emoji">💒</div>
+            <h3 class="ag-title">The Signature</h3>
+            <p class="ag-desc">The moment we've been waiting for — exchanging vows and signing the marriage license.</p>
+            <span class="ag-venue">Gemeente Amsterdam Noord (Limited Capacity)</span>
+          </div>
+        </div>
+
       <div class="agenda-list">
         <div class="ag-item">
-          <div class="ag-time">TBC</div>
+          <div class="ag-time">5:30pm</div>
           <div class="ag-line"></div>
           <div class="ag-body">
             <div class="ag-emoji">🎫</div>
@@ -928,7 +941,7 @@
             <span class="ag-venue">Venue TBC</span>
           </div>
         </div>
-
+<!--
         <div class="ag-item">
           <div class="ag-time">TBC</div>
           <div class="ag-line"></div>
@@ -939,6 +952,7 @@
             <span class="ag-venue">Venue TBC</span>
           </div>
         </div>
+   
 
         <div class="ag-item">
           <div class="ag-time">TBC</div>
@@ -950,9 +964,9 @@
             <span class="ag-venue">Venue TBC</span>
           </div>
         </div>
-
+   -->
         <div class="ag-item">
-          <div class="ag-time">TBC</div>
+          <div class="ag-time">6:00pm</div>
           <div class="ag-line"></div>
           <div class="ag-body">
             <div class="ag-emoji">🍽️</div>
@@ -962,16 +976,6 @@
           </div>
         </div>
 
-        <div class="ag-item">
-          <div class="ag-time">TBC</div>
-          <div class="ag-line"></div>
-          <div class="ag-body">
-            <div class="ag-emoji">🎉</div>
-            <h3 class="ag-title">Let's Celebrate!</h3>
-            <p class="ag-desc">Dancing, laughter, and memories that will last a lifetime.</p>
-            <span class="ag-venue">Venue TBC</span>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -981,26 +985,27 @@
     <div class="section-inner">
       <p class="section-eyebrow">A Gift from the Heart</p>
       <h2 class="section-title">Gifts & <em>Wishes</em></h2>
-      <p class="section-lead">Your presence is the greatest gift of all. If you'd like to give a little something extra, here are a few ways.</p>
+      <p class="section-lead">Your presence is the greatest gift of all. If you would like to give something extra, a contribution to our Honeymoon Fund would be grealy appreciated.</p>
 
       <div class="gift-grid">
-        <div class="gift-card">
-          <div class="gift-icon">🏦</div>
-          <h3 class="gift-title">Bank Transfer</h3>
-          <p class="gift-desc">A traditional bank transfer — details will be shared closer to the date.</p>
-          <a href="#" class="gift-action">View Details →</a>
-        </div>
+      <!--
         <div class="gift-card">
           <div class="gift-icon">🎁</div>
           <h3 class="gift-title">Gift Registry</h3>
           <p class="gift-desc">We've put together a small wish list for those who'd like to choose something special.</p>
           <a href="#" class="gift-action">View Registry →</a>
+        </div>-->
+        <div class="gift-card">
+          
+          <h3 class="gift-title">💳 Modern Love</h3>
+          <p class="gift-desc">Fast, easy, and completely stamp-free.</p>
+          <a href="https://www.ing.nl/payreq/m/?trxid=7GOCGf3Xzoir7GDwitSvEA1TzoembSIx" class="gift-action">Contribute →</a>
         </div>
         <div class="gift-card">
-          <div class="gift-icon">✈️</div>
-          <h3 class="gift-title">Honeymoon Fund</h3>
-          <p class="gift-desc">Help us create unforgettable memories on our honeymoon adventure.</p>
-          <a href="#" class="gift-action">Contribute →</a>
+         
+          <h3 class="gift-title">🧧Old School Cool</h3>
+          <p class="gift-desc">Keeping it traditional with a red pocket?</p>
+          <a  class="gift-action">Slide your envelope into our wedding box!</a>
         </div>
       </div>
 
@@ -1013,36 +1018,36 @@
     <div class="section-inner">
       <p class="section-eyebrow">Our Journey</p>
       <h2 class="section-title">Our <em>Gallery</em></h2>
-      <p class="section-lead">A few of our favourite moments together — photos that tell our story.</p>
+      <p class="section-lead">A few of our favourite moments together.</p>
 
       <div class="gallery-grid">
         <div class="gallery-item wide">
-          <div class="gallery-placeholder"><span>🌅</span><p>Add your photo</p></div>
+           <img src="images/gallery01.png" alt="Kelvin and Danyi" />
         </div>
         <div class="gallery-item tall">
-          <div class="gallery-placeholder"><span>💛</span><p>Add your photo</p></div>
+          <img src="images/gallery02.png" alt="Kelvin and Danyi" />
         </div>
         <div class="gallery-item">
-          <div class="gallery-placeholder"><span>📸</span><p>Add your photo</p></div>
+          <img src="images/gallery03.png" alt="Kelvin and Danyi" />
         </div>
         <div class="gallery-item">
-          <div class="gallery-placeholder"><span>🌻</span><p>Add your photo</p></div>
+          <img src="images/gallery04.png" alt="Kelvin and Danyi" />
         </div>
         <div class="gallery-item wide">
           <div class="gallery-placeholder"><span>✨</span><p>Add your photo</p></div>
         </div>
         <div class="gallery-item">
-          <div class="gallery-placeholder"><span>🌸</span><p>Add your photo</p></div>
+          <img src="images/gallery06.png" alt="Kelvin and Danyi" />
         </div>
         <div class="gallery-item">
           <div class="gallery-placeholder"><span>🍃</span><p>Add your photo</p></div>
         </div>
         <div class="gallery-item">
-          <div class="gallery-placeholder"><span>💍</span><p>Add your photo</p></div>
+          <div class="gallery-placeholder"><span>💛</span><p>Add your photo</p></div>
         </div>
       </div>
 
-      <p class="gallery-note">Photos will be added as we get closer to the day — check back soon!</p>
+      <p class="gallery-note">More photos will be added as we get closer to the day — check back soon!</p>
     </div>
   </section>
 
@@ -1053,7 +1058,7 @@
     <p style="font-family: var(--serif); font-style: italic; color: rgba(255,251,240,0.55); font-size: 1rem; line-height: 1.8; max-width: 380px; margin: 0 auto;">
       Thank you for being part of our love story. We can't wait to celebrate with you.
     </p>
-    <p class="footer-meta">Made with 💛 · KokoXia 2026</p>
+    <p class="footer-meta">Made with 💛 in Amsterdam · KokoXia 2026</p>
   </footer>
 
   <!-- LIGHTBOX -->
